@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:00:19 by znajdaou          #+#    #+#             */
-/*   Updated: 2024/12/11 15:58:50 by znajdaou         ###   ########.fr       */
+/*   Updated: 2024/12/11 16:12:46 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,20 +194,4 @@ char *get_next_line(int fd)
   return (line);
 }
 
-int main()
-{
-  printf("BUFFER_SIZE: %d\n", BUFFER_SIZE);
-  int fd = open("./test.txt", O_RDONLY);
-  char *line;
-  free(NULL);
-  line = get_next_line(fd);
-  while (line)
-  {
-    printf("===============================================================\n");
-    printf("line:[%s]", line);
-    printf("===============================================================\n");
-    free(line);
-    line = get_next_line(fd);
-  }
-  return 0;
-}
+
