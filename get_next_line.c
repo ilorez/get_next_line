@@ -6,14 +6,14 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:00:19 by znajdaou          #+#    #+#             */
-/*   Updated: 2024/12/11 11:01:12 by znajdaou         ###   ########.fr       */
+/*   Updated: 2024/12/11 11:25:50 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
 // join two strings
-char	*ft_strjoin(char const *s1, char const *s2)
+static char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*dst;
   size_t i = 0;
@@ -34,7 +34,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
     dst[i++] = *s1++;
   while (*s2)
     dst[i++] = *s2++;
-  dist[i] = '\0';
+  dst[i] = '\0';
   // print s1 and s2 and dst
   printf("s1: %s\n", s1);
   printf("s2: %s\n", s2);
@@ -42,7 +42,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (dst);
 }
 
-char	*ft_sublen(char const *s,size_t len)
+static char	*ft_sublen(char const *s,size_t len)
 {
 	size_t	size;
 	char	*ss;
@@ -68,16 +68,16 @@ static void _cut_line(char **c_point, char **line)
   {
     *line = ft_strdup(*c_point);
     free(*c_point);
-    **c_point = NULL;
+    *c_point = NULL;
   }
   *line = (ft_sublen(*c_point, i+1));
-  tmp = c_point;
+  tmp = *c_point;
   *c_point = ft_strdup(&(*c_point)[i+1]);
   free(tmp);
 }
 
 // search in string to find \n
-char	*ft_strchr(const char *s, int c)
+static char	*ft_strchr(const char *s, int c)
 {
 	size_t	i;
 
@@ -105,9 +105,10 @@ static char* _search_for_line(int fd, char *c_point,char *buffer)
     if (readed == 0)
       break;
     // error
-    //if (readed <  0)
+    if (readed <  0)
+      return (NULL);
     buffer[readed] = '\0';
-    found_line = ft_strchr(buffer, '\n'))
+    found_line = ft_strchr(buffer, '\n');
     tmp = c_point;
     c_point = ft_strjoin(c_point, buffer);
     free(tmp);
@@ -128,7 +129,7 @@ char *get_next_line(int fd)
     return (NULL);
   // this function read from fd file untel found "\n" or EOF
   c_point = _search_for_line(fd, c_point, buffer);
-  if (c_point == NULL)
+  if (!c_point)
   {
     free(buffer);
     return NULL;
@@ -139,4 +140,20 @@ char *get_next_line(int fd)
   // and for make it short we call it _cut_line
   _cut_line(&c_point, &line);
   return (line);
+}
+
+
+int main()
+{
+  int fd = open("test.txt", O_RDONLY);
+  char *line;
+  printf("###POS 1\n");
+  while ((line = get_next_line(fd)))
+  {
+
+    printf("###POS 2\n");
+    printf("line: \n%s\n", line);
+    free(line);
+  }
+  return 0;
 }
