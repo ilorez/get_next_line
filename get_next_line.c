@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:00:19 by znajdaou          #+#    #+#             */
-/*   Updated: 2024/12/10 18:31:44 by znajdaou         ###   ########.fr       */
+/*   Updated: 2024/12/11 11:01:12 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,40 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (dst);
 }
 
+char	*ft_sublen(char const *s,size_t len)
+{
+	size_t	size;
+	char	*ss;
+
+	ss = (char *)malloc(len * sizeof(char) + 1);
+	if (!ss)
+		return (NULL);
+  while (len--)
+    *ss++ = *s++;
+  *ss = '\0';
+	return (ss);
+}
+
+static void _cut_line(char **c_point, char **line)
+{
+  size_t  i;
+  char *tmp;
+
+  i = 0;
+  while ((*c_point)[i] && (*c_point)[i] != '\n')
+    i++;
+  if (!(*c_point)[i])
+  {
+    *line = ft_strdup(*c_point);
+    free(*c_point);
+    **c_point = NULL;
+  }
+  *line = (ft_sublen(*c_point, i+1));
+  tmp = c_point;
+  *c_point = ft_strdup(&(*c_point)[i+1]);
+  free(tmp);
+}
+
 // search in string to find \n
 char	*ft_strchr(const char *s, int c)
 {
@@ -57,7 +91,7 @@ char	*ft_strchr(const char *s, int c)
 	return ((char *)(&(s[i])));
 }
 
-static char* _search_for_line(int fd, static char *c_point,char *buffer)
+static char* _search_for_line(int fd, char *c_point,char *buffer)
 {
   ssize_t readed;
   char *tmp;
@@ -68,8 +102,8 @@ static char* _search_for_line(int fd, static char *c_point,char *buffer)
   {
     readed = read(fd, buffer, BUFFER_SIZE);
     // end of file
-    //if (readed == 0)
-
+    if (readed == 0)
+      break;
     // error
     //if (readed <  0)
     buffer[readed] = '\0';
@@ -94,9 +128,15 @@ char *get_next_line(int fd)
     return (NULL);
   // this function read from fd file untel found "\n" or EOF
   c_point = _search_for_line(fd, c_point, buffer);
+  if (c_point == NULL)
+  {
+    free(buffer);
+    return NULL;
+  }
   // this fucntion extract the line from the readed value
-  line = _get_only_the_line(c_point);
-  // this function update c_point by removing the line that we read;
-  c_point = _update_c_point(c_point);
+  // and update update c_point by removing the line that we read
+  // so best for funciton is get_line_update_c_point
+  // and for make it short we call it _cut_line
+  _cut_line(&c_point, &line);
   return (line);
 }
