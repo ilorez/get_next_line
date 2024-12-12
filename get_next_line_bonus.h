@@ -6,17 +6,18 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:00:55 by znajdaou          #+#    #+#             */
-/*   Updated: 2024/12/12 12:18:36 by znajdaou         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:19:20 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_BONUS_H
 # define GET_NEXT_LINE_BONUS_H
+
 # include <fcntl.h>
-# include <stdio.h>
 # include <stdlib.h>
-# include <string.h>
 # include <unistd.h>
+//# include <stdio.h>
+//# include <string.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 20

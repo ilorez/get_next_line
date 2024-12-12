@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:00:55 by znajdaou          #+#    #+#             */
-/*   Updated: 2024/12/12 09:38:20 by znajdaou         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:23:41 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 # define GET_NEXT_LINE_H
 
 # include <fcntl.h>
-# include <stdio.h>
 # include <stdlib.h>
-# include <string.h>
 # include <unistd.h>
+//# include <stdio.h>
+//# include <string.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 20

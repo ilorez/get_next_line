@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:01:39 by znajdaou          #+#    #+#             */
-/*   Updated: 2024/12/12 12:06:36 by znajdaou         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:06:58 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ char	*get_next_line(int fd)
 	char		*buffer;
 
 	buffer = NULL;
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= OPEN_MAX)
 		return (NULL);
 	if (!ft_strchr(c_point[fd], '\n'))
 	{
