@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:00:19 by znajdaou          #+#    #+#             */
-/*   Updated: 2024/12/12 09:36:30 by znajdaou         ###   ########.fr       */
+/*   Updated: 2024/12/12 10:22:13 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static char	*_search_for_line(int fd, char *c_point, char *buffer)
 
 /* get_next_line
  * The objective of this function is to read a line from a file descriptor
- * by reading from fd file untel found "\n" or EOF
+ * by reading BUFFER_SIZE bytes from fd file untel found "\n" or EOF
  * @param fd: file descriptor
  * @return: the line that we read from file
  * @return: NULL if error || EOF || empty file || malloc failed

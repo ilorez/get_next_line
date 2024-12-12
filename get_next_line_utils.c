@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:00:38 by znajdaou          #+#    #+#             */
-/*   Updated: 2024/12/12 09:41:14 by znajdaou         ###   ########.fr       */
+/*   Updated: 2024/12/12 10:23:51 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ char	*ft_strdup(const char *s1)
  **/
 char	*ft_sublen(char const *s, size_t len)
 {
-	size_t	size;
 	char	*ss;
 
 	ss = (char *)malloc(len * sizeof(char) + 1);
